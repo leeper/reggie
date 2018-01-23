@@ -1,0 +1,23 @@
+Package: reggie
+Type: Package
+Title: Stata-like Regression Functionality
+Version: 0.1.1
+Date: 2018-01-23
+Authors@R: c(person("Thomas J.", "Leeper", role = c("aut", "cre"),
+                    email = "thosjleeper@gmail.com",
+                    comment = c(ORCID = "0000-0003-4097-6326")))
+Description: A slim wrapper around various regression modelling functions that simplifies the process of estimating regression equations with various robust variance-covariance estimation procedures.
+License: MIT + file LICENSE
+URL: https://github.com/leeper/reggie
+BugReports: https://github.com/leeper/reggie/issues
+Depends: R (>= 2.10)
+Imports:
+    stats,
+    sandwich (>= 2.4-0),
+    survey
+Suggests:
+    testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+RoxygenNote: 6.0.1
