@@ -13,6 +13,7 @@ BugReports: https://github.com/leeper/reggie/issues
 Depends: R (>= 2.10)
 Imports:
     stats,
+    graphics,
     sandwich (>= 2.4-0),
     lmtest,
     survey

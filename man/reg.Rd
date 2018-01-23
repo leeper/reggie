@@ -21,9 +21,9 @@ reg(data, formula, ..., vcov_type = if (is.null(vcov_cluster)) "const" else
 
 \item{boot_iterations}{If \code{vcov_type = "boot"}, an integer specifying the number of bootstrap iterations.}
 
-\item{digits}{An integer specifying the preferred number of digits to use when printing the output (passed to \code{\link{print.model}}).}
+\item{digits}{An integer specifying the preferred number of digits to use when printing the output (passed to \code{\link{print.reg}}).}
 
-\item{signif.stars}{A logical specifying whether to print significance stars. Passed to \code{\link{print.model}}.}
+\item{signif.stars}{A logical specifying whether to print significance stars. Passed to \code{\link{print.reg}}.}
 }
 \value{
 A \dQuote{reg} object, which contains a traditional R modelling object in element \dQuote{model}.

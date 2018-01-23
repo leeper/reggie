@@ -7,11 +7,12 @@
 #' @param vcov_type A character string specifying a variance-covariance estimation procedure. See \code{\link[sandwich]{vcovHC}}.
 #' @param vcov_cluster If non-\code{NULL}, a formula specifying a clustering variable to be used for clustered standard errors.
 #' @param boot_iterations If \code{vcov_type = "boot"}, an integer specifying the number of bootstrap iterations.
-#' @param digits An integer specifying the preferred number of digits to use when printing the output (passed to \code{\link{print.model}}).
-#' @param signif.stars A logical specifying whether to print significance stars. Passed to \code{\link{print.model}}.
+#' @param digits An integer specifying the preferred number of digits to use when printing the output (passed to \code{\link{print.reg}}).
+#' @param signif.stars A logical specifying whether to print significance stars. Passed to \code{\link{print.reg}}.
 #' @details Estimation is provided by \code{\link[stats]{glm}} and \code{\link[survey]{svyglm}}, respectively.
 #' @return A \dQuote{reg} object, which contains a traditional R modelling object in element \dQuote{model}.
 #' @importFrom survey svydesign svyglm
+#' @importFrom graphics plot
 #' @import stats
 #' @import lmtest
 #' @import sandwich
