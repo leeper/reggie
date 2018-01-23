@@ -1,6 +1,6 @@
 # Stata-like Regression Functionality
 
-This is a work-in-progress to explore how to design Stata-like regression modelling tools for R, namely those that allow plug-and-play variance-covariance estimation procedures and also to provide arguments to modelling functions is data-formula order (rather than the traditional formula-data order).
+This is a work-in-progress to explore how to design Stata-like regression modelling tools for R, namely those that allow plug-and-play variance-covariance estimation procedures and also to provide arguments to modelling functions in `data`-`formula` order (rather than the traditional `formula`-`data` order) thus enabling easy use in data analysis pipelines via `%>%`.
 
 Contributions and feedback are welcome on [GitHub](https://github.com/leeper/reggie/issues).
 
@@ -90,11 +90,11 @@ reg(ChickWeight, weight ~ Time + Diet, vcov_type = "boot")
 z test of coefficients:
 
             Estimate Std. Error z value Pr(>|z|)
-(Intercept)    10.92       2.98     3.7    3e-04
-Time            8.75       0.28    31.6   <2e-16
-Diet2          16.17       4.52     3.6    3e-04
-Diet3          36.50       4.61     7.9    2e-15
-Diet4          30.23       3.13     9.7   <2e-16
+(Intercept)    10.92       2.80     3.9    1e-04
+Time            8.75       0.26    33.3   <2e-16
+Diet2          16.17       4.54     3.6    4e-04
+Diet3          36.50       4.46     8.2    3e-16
+Diet4          30.23       3.13     9.6   <2e-16
 ```
 
 ```r
@@ -119,8 +119,11 @@ Diet4          30.23       6.67     4.5    6e-06
 ```
 
 ```r
-# bootstrap, cluster(Chick) reps(5000): reg reg(ChickWeight, weight ~ Time + Diet, vcov_cluster = ~ Chick, vcov_type =
-# 'boot') DOESN'T CURRENTLY WORK, BUT WHY?
+# bootstrap, cluster(Chick) reps(5000): reg
+
+# reg(ChickWeight, weight ~ Time + Diet, vcov_cluster = ~ Chick, vcov_type = 'boot')
+
+# DOESN'T CURRENTLY WORK, BUT WHY?
 
 # svy: reg
 library("survey")

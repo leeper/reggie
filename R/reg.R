@@ -63,6 +63,7 @@ function(data, # make it possible for this to be a "survey" design object
     out <- structure(list(
              model = mod,
              coefficients = lmtest::coeftest(x = mod, vcov. = vc),
+             vcov = vc,
              call = sys.call(),
              design_type = if (inherits(data, "data.frame")) "rdd" else "survey",
              design_object = if (inherits(data, "data.frame")) NULL else mod$survey.design,
@@ -77,11 +78,74 @@ function(data, # make it possible for this to be a "survey" design object
 #' @title Methods for objects of class \dQuote{reg}
 #' @description Methods for common modelling generics
 #' @param x An object returned by \code{\link{reg}}
+#' @param model the same
 #' @param object the same
 #' @param formula the same
-#' @param \dots Additional arguments passed to methods
+#' @param \dots Additional arguments passed to methods. In the case of \code{print}, this is passed through to \code{\link[stats]{printCoefmat}}.
 #' @details These functions simply provide a convenience wrapper allowing for code of the form \code{predict(mod)} rather than \code{predict(mod$model)}. These functions per se do nothing directly.
 #' @return An object returned by the underlying method
+#' @export
+anova.reg <- function(object, ...) {
+    anova(object$model, ...)
+}
+
+#' @rdname reg-methods
+#' @export
+case.names.reg <- function(object, ...) {
+    case.names(object$model, ...)
+}
+
+#' @rdname reg-methods
+#' @export
+coef.reg <- function(object, ...) {
+    object$coefficients
+}
+
+# confint()
+
+#' @rdname reg-methods
+#' @export
+deviance.reg <- function(object, ...) {
+    deviance(object$model, ...)
+}
+
+#' @rdname reg-methods
+#' @export
+df.residual.reg <- function(object, ...) {
+    df.residual(object$model, ...)
+}
+
+#' @rdname reg-methods
+#' @export
+formula.reg <- function(x, ...) {
+    formula(x$model, ...)
+}
+
+#' @rdname reg-methods
+#' @export
+model.frame.reg <- function(formula, ...) {
+    model.frame(formula$model, ...)
+}
+
+#' @rdname reg-methods
+#' @export
+nobs.reg <- function(object, ...) {
+    plot(object$model, ...)
+}
+
+#' @rdname reg-methods
+#' @export
+plot.reg <- function(x, ...) {
+    plot(x$model, ...)
+}
+
+#' @rdname reg-methods
+#' @export
+predict.reg <- function(object, ...) {
+    predict(object$model, ...)
+}
+
+#' @rdname reg-methods
 #' @export
 print.reg <- function(x, ...) {
     cat("## Generalized Linear Model\n")
@@ -93,7 +157,19 @@ print.reg <- function(x, ...) {
     } else {
         cat("- Data (n=", length(x$model$residuals), "): ", x$data, "\n", sep = "")
     }
-    print(x$coefficients, digits = x$digits, signif.stars = x$signif.stars)
+    print(x$coefficients, digits = x$digits, signif.stars = x$signif.stars, ...)
+}
+
+#' @rdname reg-methods
+#' @export
+residuals.reg <- function(object, ...) {
+    residuals(object$model, ...)
+}
+
+#' @rdname reg-methods
+#' @export
+simulate.reg <- function(object, ...) {
+    simulate(object, ...)
 }
 
 #' @rdname reg-methods
@@ -104,60 +180,24 @@ summary.reg <- function(object, ...) {
 
 #' @rdname reg-methods
 #' @export
-predict.reg <- function(object, ...) {
-    predict(object$reg, ...)
+terms.reg <- function(x, ...) {
+    terms(x$model, ...)
 }
 
 #' @rdname reg-methods
 #' @export
-plot.reg <- function(x, ...) {
-    plot(x$reg, ...)
+variable.names.reg <- function(object, ...) {
+    variable.names(object$model, ...)
 }
 
 #' @rdname reg-methods
 #' @export
 vcov.reg <- function(object, ...) {
-    vcov(object$reg, ...)
+    object$vc
 }
 
 #' @rdname reg-methods
 #' @export
-coef.reg <- function(object, ...) {
-    object$coefficients
-}
-
-#' @rdname reg-methods
-#' @export
-residuals.reg <- function(object, ...) {
-    residuals(object$reg, ...)
-}
-
-#' @rdname reg-methods
-#' @export
-terms.reg <- function(x, ...) {
-    terms(x$reg, ...)
-}
-
-#' @rdname reg-methods
-#' @export
-anova.reg <- function(object, ...) {
-    anova(object$reg, ...)
-}
-
-#' @rdname reg-methods
-#' @export
-df.residual.reg <- function(object, ...) {
-    df.residual(object$reg, ...)
-}
-
-#' @rdname reg-methods
-#' @export
-deviance.reg <- function(object, ...) {
-    deviance(object$reg, ...)
-}
-
-#' @rdname reg-methods
-#' @export
-model.frame.reg <- function(formula, ...) {
-    model.frame(formula$reg, ...)
+weights.reg <- function(object, ...) {
+    weights(object, ...)
 }

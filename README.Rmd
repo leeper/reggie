@@ -1,6 +1,6 @@
 # Stata-like Regression Functionality
 
-This is a work-in-progress to explore how to design Stata-like regression modelling tools for R, namely those that allow plug-and-play variance-covariance estimation procedures and also to provide arguments to modelling functions is data-formula order (rather than the traditional formula-data order).
+This is a work-in-progress to explore how to design Stata-like regression modelling tools for R, namely those that allow plug-and-play variance-covariance estimation procedures and also to provide arguments to modelling functions in `data`-`formula` order (rather than the traditional `formula`-`data` order) thus enabling easy use in data analysis pipelines via `%>%`.
 
 Contributions and feedback are welcome on [GitHub](https://github.com/leeper/reggie/issues).
 
@@ -32,7 +32,9 @@ reg(ChickWeight, weight ~ Time + Diet, vcov_type = "boot")
 reg(ChickWeight, weight ~ Time + Diet, vcov_cluster = ~ Chick)
 
 # bootstrap, cluster(Chick) reps(5000): reg
+
 #reg(ChickWeight, weight ~ Time + Diet, vcov_cluster = ~ Chick, vcov_type = "boot")
+
 # DOESN'T CURRENTLY WORK, BUT WHY?
 
 # svy: reg
