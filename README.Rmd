@@ -1,6 +1,6 @@
 # Stata-like Regression Functionality
 
-This is a work-in-progress to explore how to design Stata-like regression modelling tools for R, namely those that allow plug-and-play variance-covariance estimation procedures.
+This is a work-in-progress to explore how to design Stata-like regression modelling tools for R, namely those that allow plug-and-play variance-covariance estimation procedures and also to provide arguments to modelling functions is data-formula order (rather than the traditional formula-data order).
 
 Contributions and feedback are welcome on [GitHub](https://github.com/leeper/reggie/issues).
 
@@ -10,6 +10,8 @@ Contributions and feedback are welcome on [GitHub](https://github.com/leeper/reg
 options(width = 120)
 knitr::opts_chunk$set(comment = "", warning = FALSE, message = FALSE, echo = TRUE, tidy = TRUE, size="small", fig.width = 10, fig.height = 10)
 ```
+
+In addition to plug-and-play variance-covariance procedures, the `reg()` function also provides pretty print methods.
 
 ```{r load}
 library("reggie")
@@ -39,6 +41,8 @@ data(api)
 dstrat <- svydesign(id=~1,strata=~stype, weights=~pw, data=apistrat, fpc=~fpc)
 reg(dstrat, api00 ~ ell + meals + mobility)
 ```
+
+The "model" object class contains the underlying model object as its `model` argument, and methods for various commonly used generic functions (`coef()`, `vcov()`, `plot()`, `terms()`, `predict()`) are provided that behave like those operations on a standard modelling object.
 
 ## Installation
 
