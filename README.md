@@ -1,12 +1,14 @@
 # Stata-like Regression Functionality
 
-This is a work-in-progress to explore how to design Stata-like regression modelling tools for R, namely those that allow plug-and-play variance-covariance estimation procedures.
+This is a work-in-progress to explore how to design Stata-like regression modelling tools for R, namely those that allow plug-and-play variance-covariance estimation procedures and also to provide arguments to modelling functions is data-formula order (rather than the traditional formula-data order).
 
 Contributions and feedback are welcome on [GitHub](https://github.com/leeper/reggie/issues).
 
 ## Code Examples
 
 
+
+In addition to plug-and-play variance-covariance procedures, the `reg()` function also provides pretty print methods.
 
 
 ```r
@@ -88,11 +90,11 @@ reg(ChickWeight, weight ~ Time + Diet, vcov_type = "boot")
 z test of coefficients:
 
             Estimate Std. Error z value Pr(>|z|)
-(Intercept)    10.92       2.79     3.9    9e-05
-Time            8.75       0.26    34.0   <2e-16
-Diet2          16.17       4.33     3.7    2e-04
-Diet3          36.50       4.42     8.3   <2e-16
-Diet4          30.23       3.19     9.5   <2e-16
+(Intercept)    10.92       2.98     3.7    3e-04
+Time            8.75       0.28    31.6   <2e-16
+Diet2          16.17       4.52     3.6    3e-04
+Diet3          36.50       4.61     7.9    2e-15
+Diet4          30.23       3.13     9.7   <2e-16
 ```
 
 ```r
@@ -144,6 +146,8 @@ ell            -0.48       0.39    -1.2      0.2
 meals          -3.14       0.28   -11.1   <2e-16
 mobility        0.23       0.39     0.6      0.6
 ```
+
+The "model" object class contains the underlying model object as its `model` argument, and methods for various commonly used generic functions (`coef()`, `vcov()`, `plot()`, `terms()`, `predict()`) are provided that behave like those operations on a standard modelling object.
 
 ## Installation
 
